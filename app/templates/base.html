@@ -1,0 +1,16 @@
+<!doctype html>
+<html>
+    <head>
+      {% if title %}
+      <title>{{ title }} - SkillSwap</title>
+      {% else %}
+      <title>Welcome to SkillSwap</title>
+      {% endif %}
+    </head>
+    <body>
+        <div>SkillSwap: <a href="/index">Home</a></div>
+        <hr>
+        {% block content %}
+        {% endblock %}
+    </body>
+</html>

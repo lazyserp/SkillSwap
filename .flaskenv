@@ -1,0 +1,2 @@
+FLASK_APP=SkillSwap.py
+FLASK_DEBUG=1
