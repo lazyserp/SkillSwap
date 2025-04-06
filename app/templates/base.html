@@ -6,11 +6,29 @@
       {% else %}
       <title>Welcome to SkillSwap</title>
       {% endif %}
+      <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
     </head>
     <body>
-        <div>SkillSwap: <a href="/index">Home</a></div>
-        <hr>
-        {% block content %}
-        {% endblock %}
+        <div class="navbar">SkillSwap: 
+          <a href="{{ url_for('index') }}">Home</a>
+          <a href="{{ url_for('login') }}">Login</a>
+        </div>
+        
+        <div class="container">
+            {% with messages = get_flashed_messages() %}
+            {% if messages %}
+            <div class="flash-messages">
+                <ul>
+                {% for message in messages %}
+                    <li>{{ message }}</li>
+                {% endfor %}
+                </ul>
+            </div>
+            {% endif %}
+            {% endwith %}
+            
+            {% block content %}
+            {% endblock %}
+        </div>
     </body>
 </html>

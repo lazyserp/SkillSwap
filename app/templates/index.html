@@ -1,15 +1,31 @@
 {% extends "base.html" %}
 
-
 {% block content %}
-
-    <h1> Hello, {{user.username}}</h1>
-    <label for="username">username</label>
-    <input id="username" placeholder="Enter Username "/>
-
-    <label for="pass">Password</label>
-    <input id=pass placeholder="Enter Password"/>
-
-    <button> Register </button>
-
+    <h1>Welcome to SkillSwap, {{ user.username }}!</h1>
+    
+    <div class="intro">
+        <p>SkillSwap is a platform where you can exchange skills with others in your community.</p>
+        <p>Share what you know, learn what you don't!</p>
+    </div>
+    
+    <div class="featured-skills">
+        <h2>Featured Skills</h2>
+        <ul>
+            <li>Web Development</li>
+            <li>Graphic Design</li>
+            <li>Language Learning</li>
+            <li>Music Lessons</li>
+            <li>Cooking Classes</li>
+        </ul>
+    </div>
+    
+    <div class="get-started">
+        <h2>How to Get Started</h2>
+        <ol>
+            <li>Create your profile</li>
+            <li>List the skills you can teach</li>
+            <li>Browse skills you want to learn</li>
+            <li>Connect with others and start swapping!</li>
+        </ol>
+    </div>
 {% endblock %}
