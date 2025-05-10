@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title> {% block title %} SkillSwap {% endblock %} </title>
+            <link rel="stylesheet" href="{{ url_for('static',filename='styles.css')}}">
+    </head>
+    <body>
+        <!-- near top of <body> -->
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+    <ul>
+        {% for msg in messages %}
+        <li>{{ msg }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+    {% endwith %}
+
+        <header>
+            <nav>
+                <a href="/home"> Home </a>
+                <a href="/about"> About </a>
+                <a href="/login"> Login </a>
+            </nav>
+        </header>
+        <hr>
+        {% block content %}
+        {% endblock %}
+    </body>
+</html>

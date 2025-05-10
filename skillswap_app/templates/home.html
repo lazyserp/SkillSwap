@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+
+<h1>Welcome to SkillSwap, {{ name }}!</h1>
+
+{% if name != "Guest" %}
+    <p><a href="/logout">Logout</a></p>
+{% else %}
+    <p><a href="/login">Login</a> | <a href="/register">Register</a></p>
+    
+{% endif %}
+{% endblock %}
