@@ -1,9 +1,26 @@
-{% extends 'base.html' %}
+{% extends 'base.html' %} {% block title %} Login {% endblock %} {% block
+content %}
 
-{% block title %} Login {% endblock %}
+<h1 class="main-heading-login">SkillSwap</h1>
+<div class="login-container">
+  <form  method="post">
+    <label for="username" class="sub-heading">Username: </label>
+    <input
+      id="username"
+      type="username"
+      placeholder="Enter Your Username"
+      name="username"
+      requried minlength="6"
+    />
 
-{% block content %}
-
-
-  
+    <label for="password" class="sub-heading">Password: </label>
+    <input
+      id="password"
+      type="password"
+      placeholder="Enter your password"
+      name="password"
+    />
+    <button class="login-button">Login</button>
+  </form>
+</div>
 {% endblock %}
