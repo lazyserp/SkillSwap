@@ -1,0 +1,17 @@
+<form method="post">
+    {{ render_form.uName.label }}
+    {{ render_form.uName(class=None) }} {# class for CSS styling #}
+
+    {{ render_form.uDob.label }}
+    {{ render_form.uDob(type="date") }}
+
+    {{ render_form.uPass.label }}
+    {{ render_form.uPass() }} 
+
+    {{ render_form.uGender.label }}
+    {{ render_form.uGender() }}
+
+    <button> submit </button>
+
+
+</form>
