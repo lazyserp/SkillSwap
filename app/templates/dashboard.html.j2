@@ -1,0 +1,18 @@
+{% extends "base.html.j2" %}
+<title>{% block title %} Dashboard {% endblock%} </title>
+
+{% block content %}
+
+<h2>Welcome {{ user.name }}</h2>
+<h4>Your Bio:</h4>
+<p>{{ user.bio or 'No bio yet.' }}</p>
+
+<h4>Skills You Can Teach:</h4>
+<p>{{ user.skills_offered or 'None listed.' }}</p>
+
+<h4>Skills You Want to Learn:</h4>
+<p>{{ user.skills_needed or 'None listed.' }}</p>
+
+<a href="{{ url_for('main.logout') }}">Logout</a>
+
+{% endblock %}

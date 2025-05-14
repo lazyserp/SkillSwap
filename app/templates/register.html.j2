@@ -7,10 +7,23 @@
     {{ render_form.uDob(type="date") }}
 
     {{ render_form.uPass.label }}
-    {{ render_form.uPass() }} 
+    {{ render_form.uPass() }}
 
     {{ render_form.uGender.label }}
     {{ render_form.uGender() }}
+
+    <p>
+        {{ render_form.skills_offered.label }}<br>
+        {{ render_form.skills_offered(size=32) }}
+    </p>
+    <p>
+        {{ render_form.skills_needed.label }}<br>
+        {{ render_form.skills_needed(size=32) }}
+    </p>
+    <p>
+        {{ render_form.bio.label }}<br>
+        {{ render_form.bio(cols=40, rows=5) }}
+    </p>
 
     <button> submit </button>
 

@@ -1,7 +1,6 @@
 {% macro input_field(id, name, placeholder, type="text", required=False, minlength=None) %}
 
 <input id="{{ id }}" name="{{ name }}" type="{{ type }}" placeholder="{{ placeholder }}"
-  class="mt-2 mb-4 block w-full rounded-md bg-gray-100 border-gray-300 focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 px-4 py-2"
   {% if required %} required 
   {% endif %}  
   {% if minlength %} minlength= "{{ minlength }}"  

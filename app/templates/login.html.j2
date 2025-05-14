@@ -5,16 +5,17 @@
 {% import "macros.html.j2" as input_field %}
 
 
-<h1 class="main-heading-login">SkillSwap</h1>
-<div class="login-container">
-  <form  method="post">
-      <label for="username" class="sub-heading">Username: </label>
-      {{ input_field.input_field("password", "password", "Enter your password", type="password", required=True, minlength=6) }}
+<h2>Login</h2>
 
-    <label for="password" class="sub-heading">Password: </label>
-    {{ input_field.input_field("password", "password", "Enter your password", type="password") }}
 
-    <button class="login-button">Login</button>
-  </form>
+
+<form method="POST">
+  {{ form.hidden_tag() }}
+
+  <p>{{ form.uName.label }}<br>{{ form.uName(size=32) }}</p>
+  <p>{{ form.uPass.label }}<br>{{ form.uPass(size=32) }}</p>
+  <p>{{ form.submit() }}</p>
+</form>
+
 </div>
 {% endblock %}
