@@ -1,30 +1,35 @@
-from flask import Blueprint, render_template,redirect,request,url_for,session
-from wtforms import Form,StringField,validators,DateTimeField,PasswordField,SelectField
+from flask import Blueprint, render_template, redirect, url_for, flash
+from app.forms import RegisterForm
+from app.models import User
+from app import db
+from werkzeug.security import generate_password_hash
 
+main = Blueprint('main', __name__)
 
-class UserRegisterationForm(Form):
-    uName = StringField("Name: ",validators=[validators.InputRequired(),validators.length(min=2)])
-    uDob = DateTimeField("Date of Birth: ",validators=[validators.InputRequired()],format= '%Y-%m-%d')
-    uPass = PasswordField("Password: ",validators=[validators.InputRequired(),validators.length(min=8,max=150)])
-    uGender = SelectField("Gender: ",validators=[validators.InputRequired()],choices=[(1,"Male"),(2,"Female")])
-main = Blueprint('main',__name__)
-
-@main.route('/')
-@main.route('/home')
+@main.route('/', methods=['GET'])
 def home():
-    return render_template('homepage.html.j2' )
+    return render_template("homepage.html.j2")
 
+@main.route('/register', methods=['GET', 'POST'])
+def register():
+    form = RegisterForm()
+    if form.validate_on_submit():
+        hashed_password = generate_password_hash(form.uPass.data)
 
-@main.route('/login',methods=['POST','GET'])
+        new_user = User(
+            name=form.uName.data,
+            dob=form.uDob.data,
+            gender=form.uGender.data,
+            password=hashed_password
+        )
+
+        db.session.add(new_user)
+        db.session.commit()
+        flash("User registered successfully!", "success")
+        return redirect(url_for('main.login'))
+
+    return render_template("register.html.j2", render_form=form)
+
+@main.route('/login', methods=['GET', 'POST'])
 def login():
-    if request.method == "POST":
-        user_name = request.form['username']
-    return render_template('login.html.j2')
-
-
-@main.route('/register',methods=["GET","POST"])
-def register_user():
-    reg_form = UserRegisterationForm(request.form)
-    if request.method == "POST" and reg_form.validate():
-        print(reg_form.uName.data) # get hold of  data input in the field
-    return render_template('register.html.j2',render_form = reg_form)
+    return render_template("login.html.j2")
