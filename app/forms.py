@@ -18,3 +18,10 @@ class LoginForm(FlaskForm):
     uName = StringField('Username', validators=[DataRequired()])
     uPass= PasswordField('Password', validators=[DataRequired()])
     submit = SubmitField('Login')
+
+
+class ForgotPasswdForm(FlaskForm):
+    uName = StringField('Username: ',validators=[InputRequired()])
+    new_pass = PasswordField('New Password: ',validators=[InputRequired()])
+    confirm_pass = PasswordField('Confirm New Password: ',validators=[InputRequired()])
+    submit = SubmitField('Reset Password')

@@ -1,0 +1,20 @@
+{% extends "base.html.j2" %}
+{% block title %}Forgot Password {% endblock title %}
+
+{% block content %}
+    <form method="POST">
+        {{form.hidden_tag() }}
+
+        {{ form.uName.label }}
+        {{ form.uName() }}
+
+        {{ form.new_pass.label }}
+        {{ form.new_pass() }}
+
+        {{ form.confirm_pass.label }}
+        {{ form.confirm_pass() }}
+
+        {{ form.submit() }}
+    </form>
+
+{% endblock content %}

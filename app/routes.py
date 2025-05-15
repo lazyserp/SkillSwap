@@ -1,5 +1,5 @@
 from flask import Blueprint, render_template, redirect, url_for, flash,session,request
-from app.forms import RegisterForm,LoginForm
+from app.forms import RegisterForm,LoginForm,ForgotPasswdForm
 from app.models import User
 from app import db
 from werkzeug.security import generate_password_hash,check_password_hash
@@ -15,18 +15,15 @@ def register():
     form = RegisterForm()
     if form.validate_on_submit():
         hashed_password = generate_password_hash(form.uPass.data)
-        skills_offered = form.skills_offered.data
-        skills_needed = form.skills_needed.data
-        bio  = form.bio.data
 
         new_user = User( 
             name=form.uName.data,
             dob=form.uDob.data,
             gender=form.uGender.data,
             password=hashed_password,
-            skills_offered = skills_offered,
-            skills_needed = skills_needed,
-            bio = bio )
+            skills_offered = form.skills_needed.data,
+            skills_needed = form.skills_needed.data,
+            bio = form.bio.data )
 
         db.session.add(new_user)
         db.session.commit()
@@ -39,7 +36,7 @@ def register():
 def login():
     form = LoginForm()
 
-    if form.validate_on_submit():  # ✅ MUST be there!
+    if form.validate_on_submit():  
         user = User.query.filter_by(name=form.uName.data).first()
         if user and check_password_hash(user.password, form.uPass.data):
             session["user_id"] = user.id
@@ -48,6 +45,23 @@ def login():
         else:
             flash("Invalid username or password", "danger")
     return render_template("login.html.j2", form=form)
+
+
+@main.route('/forgot-password', methods=['GET', 'POST'])
+def forgotpass():
+    form = ForgotPasswdForm()
+    if form.validate_on_submit():
+        user = User.query.filter_by(name=form.uName.data).first()
+        if user:
+            new_pass_hash = generate_password_hash(form.new_pass.data)
+            user.password = new_pass_hash
+            db.session.commit()
+            flash("Password Changed Successfully!", "success")
+            return redirect(url_for("main.login"))
+        else:
+            flash("User not found , please re-check", "danger")
+
+    return render_template("forgotPass.html.j2", form=form)
 
 
 
@@ -59,6 +73,9 @@ def dashboard():
     
     user = User.query.get(session["user_id"])
     return render_template("dashboard.html.j2",user=user)
+
+
+
 
 @main.route('/logout')
 def logout():
