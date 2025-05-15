@@ -40,7 +40,6 @@ def login():
         user = User.query.filter_by(name=form.uName.data).first()
         if user and check_password_hash(user.password, form.uPass.data):
             session["user_id"] = user.id
-            flash(f"Welcome back, {user.name}!", "success")
             return redirect(url_for('main.dashboard'))
         else:
             flash("Invalid username or password", "danger")
@@ -59,7 +58,7 @@ def forgotpass():
             flash("Password Changed Successfully!", "success")
             return redirect(url_for("main.login"))
         else:
-            flash("User not found , please re-check", "danger")
+            flash("User not found", "danger")
 
     return render_template("forgotPass.html.j2", form=form)
 

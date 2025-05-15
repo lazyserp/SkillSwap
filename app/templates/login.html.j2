@@ -25,7 +25,7 @@
   {{ form.hidden_tag() }}
 
   <p>{{ form.uName.label }}<br>{{ form.uName(size=32) }}</p>
-  <p>{{ form.uPass.label }}<br>{{ form.uPass(size=32) }}</p>
+  <p>{{ form.uPass.label }} &emsp; <a style="color: antiquewhite;"   href="{{ url_for('main.forgotpass') }}">Forgot Password?</a><br>{{ form.uPass(size=32) }}</p>
   <p>{{ form.submit() }}</p>
 </form>
 
